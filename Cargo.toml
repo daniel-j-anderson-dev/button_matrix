@@ -1,0 +1,10 @@
+[package]
+name = "button_matrix"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+linux-embedded-hal = "0.4.0"
+
+[build]
+target = "aarch64-unknown-linux-gnu"

@@ -1,0 +1,9 @@
+GPIO | OrangePi pin | keypad pin |
+PI00 | 29           | 1          |
+PI01 | 12           | 6          |
+PI02 | 35           | 4          |
+PI03 | 40           | 8          |
+PI04 | 38           | 7          |
+PI15 | 31           | 2          |
+PI16 | 37           | 5          |
+PI12 | 33           | 3          |

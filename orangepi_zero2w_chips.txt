@@ -1,0 +1,32 @@
+[src/main.rs:5:9] chip = Ok(
+    Chip {
+        inner: InnerChip {
+            path: "/dev/gpiochip1",
+            file: File {
+                fd: 4,
+                path: "/dev/gpiochip1",
+                read: true,
+                write: false,
+            },
+            name: "gpiochip1",
+            label: "7022000.pinctrl",
+            lines: 32,
+        },
+    },
+)
+[src/main.rs:5:9] chip = Ok(
+    Chip {
+        inner: InnerChip {
+            path: "/dev/gpiochip0",
+            file: File {
+                fd: 4,
+                path: "/dev/gpiochip0",
+                read: true,
+                write: false,
+            },
+            name: "gpiochip0",
+            label: "300b000.pinctrl",
+            lines: 288,
+        },
+    },
+)
