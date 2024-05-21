@@ -3,7 +3,7 @@ use linux_embedded_hal::gpio_cdev::{Chip, EventRequestFlags, EventType, LineRequ
 const CLEAR: &str = "\x1b[1;1H";
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // print!("{}", CLEAR);
+    print!("{}", CLEAR);
 
     let mut gpio_chip = Chip::new("/dev/gpiochip0")?;
     let rows = [
@@ -20,40 +20,30 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     ];
 
     'keypad: loop {
+        print!("{}", CLEAR);
+
         // find char
-        let mut row_index = 0;
-        let mut column_index = 0;
-        'row: loop {
-            rows[row_index].set_value(1)?;
+        'row: for row in rows.iter().cycle() {
+            print!("{}", CLEAR);
+
+            row.set_value(1)?;
         
-            column_index = 0;
-            'col: while column_index < 4 {
-                let event = columns[column_index].get_event()?;
-                println!("{:?}", event);
+            for column in columns.iter_mut() {
+                print!("{}", CLEAR);
+    
+                let event = column.get_event()?;
+    
+                dbg!(&event);
+    
                 match event.event_type() {
-                    EventType::RisingEdge => {
-                        println!("EventType::RisingEdge");
-                        break 'row;
-                    }
-                    EventType::FallingEdge => println!("EventType::FallingEdge"),
+                    EventType::RisingEdge => break 'row,
+                    EventType::FallingEdge => {},
                 }
-                column_index += 1;
             }
-
-
-            rows[row_index].set_value(0)?;
-            
-            row_index += 1;
-            if row_index >= 4 {
-                row_index = 0;
-            }
-
+    
+            row.set_value(0)?;
         }
         
-        println!("({}, {})", row_index, column_index);
-
-        // println!("({},{}) Button pressed", row_index, column_index);
-
         // process char
         // break;
     }
